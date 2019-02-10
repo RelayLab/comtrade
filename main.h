@@ -6,8 +6,31 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX_STRING_LENGTH 512
+#define true 1
+#define false 0
+typedef unsigned int bool;
 
-void read_from_file ( FILE * file_to_read, char * buff );
+/*functions declarations*/
+void read_from_file ( FILE * file_to_read, char * buff , bool *is_eol );
+
+void read_analog_channels ( 
+		FILE * file_to_read,
+		char * buff,
+		cfg_file_2003 * cfg_file,
+		bool *is_eol);
+
+void read_digital_channels ( 
+		FILE * file_to_read,
+		char * buff,
+		cfg_file_2003 * cfg_file,
+		bool *is_eol);
+
+void read_sampling_data ( 
+		FILE * file_to_read,
+		char * buff,
+		cfg_file_2003 * cfg_file,
+		bool *is_eol);
+
 
 #endif
 

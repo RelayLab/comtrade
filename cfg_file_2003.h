@@ -8,7 +8,7 @@
  * in a correct way*/
 #include "analog_channel.h"
 #include "digital_channel.h"
-#include "sampling_rate.h"
+#include "sampling_data.h"
 
 #ifndef CFG_FILE_2003_H
 #define CFG_FILE_2003_H 1
@@ -71,6 +71,7 @@ struct cfg_file_2003{
 	 * 0 to 32 chars*/
 	double lf;
 
+	/*the next line means a
 	/*total number of samples (points) in dat file*/
 	int nrates;
 
@@ -78,7 +79,7 @@ struct cfg_file_2003{
 	 * critical*/
 	/*WARNING: if nrates and samp are zero, the TIMESTAMP becomes critical
 	 * and ENDSAMP must be set to the number of the last sample in the file*/
-	sampling_rate * s_rates;
+	sampling_data * s_data;
 
 	/*following lines represent timestamps for
 	 * the first point of the file
