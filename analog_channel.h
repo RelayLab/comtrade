@@ -13,7 +13,7 @@ struct analog_channel{
 	int An;
 
 	/*critical
-	 * channel identifier -- name of the channel, from 1 to 128 channels*/
+	 * channel identifier -- name of the channel, from 1 to 128 chars*/
 	char ch_id[128];
 
 	/*non-critical
