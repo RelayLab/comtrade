@@ -1,6 +1,12 @@
 #include "main.h"
 
-void read_cfg_file ( cfg_file_2003 * cfg_file , char * filename) {
+void read_cfg_file ( cfg_file_2003 * cfg_file , char * filename_prefix) {
+
+	/*open cfg file to read from*/
+
+	char filename [256];
+	strcpy ( filename , filename_prefix );
+	strcat ( filename , ".cfg" );
 
 	/*open cfg file to read from*/
 	FILE * file_to_read = fopen ( filename , "r" );
@@ -76,7 +82,9 @@ void read_cfg_file ( cfg_file_2003 * cfg_file , char * filename) {
 	fclose( file_to_read ) ;
 
 	free ( cfg_file -> a_channels );
+	free ( cfg_file -> d_channels );
+	free ( cfg_file -> s_data );
 	free ( cfg_file );
 
-	return 0;
+	return;
 }

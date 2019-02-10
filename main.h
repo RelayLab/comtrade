@@ -11,6 +11,8 @@
 typedef unsigned int bool;
 
 /*functions declarations*/
+void read_cfg_file ( cfg_file_2003 * cfg_file , char * filename) ;
+void read_dat_file ( dat_file_2003 * dat_file , char * filename) ;
 void read_from_file ( FILE * file_to_read, char * buff , bool *is_eol );
 
 void read_analog_channels ( 
