@@ -1,8 +1,12 @@
 #include "main.h"
 
-void read_dat_file ( dat_file_2003 * dat_file , char * filename_prefix) {
+void read_dat_file (
+		dat_file_2003 * dat_file ,
+		char * filename_prefix ,
+		int columns ,
+		int rows ) {
 
-	/*open cfg file to read from*/
+	/*open dat file to read from*/
 
 	char filename [256];
 	strcpy ( filename , filename_prefix );
@@ -11,18 +15,27 @@ void read_dat_file ( dat_file_2003 * dat_file , char * filename_prefix) {
 	/*temp buffer for saving data from text file*/
 	char buff [MAX_STRING_LENGTH];
 
+	dat_file -> data_lines = malloc (  sizeof ( data_line ) * rows  );
 	int i = 0;
-	while (  !feof( file_to_read )  ) {
-		char char_from_file = fgetc ( file_to_read ) ;
-		if ( char_from_file == ',' ) {
-			buff[i] = '\0' ;
+	bool is_eol = false;
+	for ( i = 0 ; i < rows ; i++ ){
+
+		read_from_file ( file_to_read , buff , &is_eol );
+		dat_file -> data_line [i] -> n = atoi ( buff );
+
+		read_from_file ( file_to_read , buff , &is_eol );
+		dat_file -> data_line [i] -> timestamp = atof ( buff );
+
+		for ( j = 0 ; j < nA ; j++ ){
+			read_from_file ( file_to_read , buff , &is_eol );
+			dat_file -> data_line [i] -> a_values [j] = atof ( buff );
 		}
-		else if ( char_from_file == '\n' ) {
-			buff[i] = '\0' ;
+		for ( j = 0 ; j < nD ; j++ ){
+			read_from_file ( file_to_read , buff , &is_eol );
+			dat_file -> data_line [i] -> D_values [j] = atoi ( buff );
 		}
-		else {
-			buff[i] = char_from_file ;
-		}
+
+
 	}
 	
 	

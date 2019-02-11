@@ -84,7 +84,6 @@ void read_cfg_file ( cfg_file_2003 * cfg_file , char * filename_prefix) {
 	free ( cfg_file -> a_channels );
 	free ( cfg_file -> d_channels );
 	free ( cfg_file -> s_data );
-	free ( cfg_file );
 
 	return;
 }

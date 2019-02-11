@@ -1,7 +1,12 @@
 #include "main.h"
 
+/* this executable transforms contents of comtrade record to csv file
+ * in order to plot the contents*/
+
 int main ( int argc, char ** argv ) {
 
+	/*the program accepts only 1 arg, prefix name of .cfg and .dat file,
+	 * they should be similar*/
 	if ( argc != 2 ){
 		fprintf ( stderr , "%s\n", "Wrong number of arguments proveded!" );
 		return 0;
@@ -11,6 +16,18 @@ int main ( int argc, char ** argv ) {
 
 	cfg_file_2003 * cfg_file = malloc ( sizeof ( cfg_file_2003 ) );
 	read_cfg_file ( cfg_file , filename );
-	read_dat_file ( cfg_file , filename );
 
+	/*for simplicity of the program, .dat file dimensions calculated
+	 * via .cfg file contents */
+
+	/*each line represents number of the line, timestamp and TT samples of data*/
+	int columns = 2 + cfg_file -> TT; 
+	/*number of lines equal to the last sampling data "endsamp" value*/
+	int rows = cfg_file -> s_data [ cfg_file -> nrates - 1 ].endsamp;
+
+	dat_file_2003 * dat_file = malloc (  sizeof ( dat_file_2003 )  );
+	read_dat_file ( dat_file, filename , columns , rows );
+
+	free ( cfg_file ) ;
+	free ( dat_file ) ;
 }
