@@ -21,12 +21,11 @@ int main ( int argc, char ** argv ) {
 	 * via .cfg file contents */
 
 	/*each line represents number of the line, timestamp and TT samples of data*/
-	int columns = 2 + cfg_file -> TT; 
 	/*number of lines equal to the last sampling data "endsamp" value*/
 	int rows = cfg_file -> s_data [ cfg_file -> nrates - 1 ].endsamp;
 
 	dat_file_2003 * dat_file = malloc (  sizeof ( dat_file_2003 )  );
-	read_dat_file ( dat_file, filename , columns , rows );
+	read_dat_file ( dat_file, filename , cfg_file -> nA , cfg_file -> nD , rows );
 
 	free ( cfg_file ) ;
 	free ( dat_file ) ;
