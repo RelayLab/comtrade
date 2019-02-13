@@ -7,12 +7,13 @@ int main ( int argc, char ** argv ) {
 
 	/*the program accepts only 1 arg, prefix name of .cfg and .dat file,
 	 * they should be similar*/
-	if ( argc != 2 ){
+	if ( argc != 3 ){
 		fprintf ( stderr , "%s\n", "Wrong number of arguments proveded!" );
 		return 0;
 	}
 	
 	char * filename = argv[1];
+	int excerpt_step = atoi (argv[2]);
 
 	cfg_file_2003 * cfg_file = malloc ( sizeof ( cfg_file_2003 ) );
 	read_cfg_file ( cfg_file , filename );
@@ -28,7 +29,7 @@ int main ( int argc, char ** argv ) {
 
 	read_dat_file ( dat_file, filename , cfg_file -> nA , cfg_file -> nD , rows );
 
-	write_to_csv ( cfg_file , dat_file , filename );
+	write_to_csv ( cfg_file , dat_file , filename , excerpt_step );
 
 	free ( cfg_file -> a_channels );
 	free ( cfg_file -> d_channels );

@@ -11,7 +11,8 @@
 void write_to_csv (
 		cfg_file_2003 * cfg_file,
 		dat_file_2003 * dat_file ,
-		char * filename_prefix ) {
+		char * filename_prefix ,
+		int excerpt_step) {
 
 	/* open a stream for writing */
 	char filename [256];
@@ -37,7 +38,7 @@ void write_to_csv (
 
 	/*for following rows we print timestamp column and then
 	 * all the analog and discrete vals columns*/
-	for ( i = 0 ; i < dat_file -> data_lines_count ; i++ ){
+	for ( i = 0 ; i < dat_file -> data_lines_count ; i = excerpt_step + i ){
 
 		fprintf ( file_to_write , "%d;" , dat_file -> data_lines [i] . timestamp );
 
