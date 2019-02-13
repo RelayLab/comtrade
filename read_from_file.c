@@ -8,7 +8,7 @@ void read_from_file (
 	int char_from_file, i;
 
 	if (*is_eol == true){ /*if eol has been reached then return zero till manual reset*/
-		buff[i] = '\0'; }
+		buff[0] = '\0'; }
 	else{
 
 		for ( i = 0 ; i < MAX_STRING_LENGTH-1 ; i++ ){

@@ -40,6 +40,11 @@ void read_sampling_data (
 		cfg_file_2003 * cfg_file,
 		bool *is_eol);
 
+void write_to_csv (
+		cfg_file_2003 * cfg_file,
+		dat_file_2003 * dat_file ,
+		char * filename_prefix ) ;
+
 
 #endif
 

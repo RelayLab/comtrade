@@ -48,6 +48,7 @@ void read_dat_file (
 
 	}
 	
+	fclose ( file_to_read ); 
 	
 	return;
 }

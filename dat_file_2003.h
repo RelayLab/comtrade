@@ -12,7 +12,7 @@
 struct dat_file_2003{
 
 	data_line * data_lines;
-	
+	int data_lines_count;
 };
 
 typedef struct dat_file_2003  dat_file_2003;
