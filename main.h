@@ -43,8 +43,7 @@ void read_sampling_data (
 void write_to_csv (
 		cfg_file_2003 * cfg_file,
 		dat_file_2003 * dat_file ,
-		char * filename_prefix ,
-		int excerpt_step) ;
+		char * filename_prefix ) ;
 
 
 #endif
