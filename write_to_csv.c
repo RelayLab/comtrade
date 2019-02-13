@@ -22,44 +22,43 @@ void write_to_csv (
 	int i , j;
 	double value_to_print;
 
-	/*at first, we print time info row
+
+	/*the first row with names*/
 	fprintf ( file_to_write, "time;" );
-	for ( i = 0 ; i < dat_file -> data_lines_count ; i++ ){
-		fprintf ( file_to_write, "%f;" , dat_file -> data_lines [i] . timestamp cfg_file -> a_channels [i]  . ch_id );
-	};
-	*/
 
-	/* at second, we print analog channels as rows */
 	for ( i = 0 ; i < cfg_file -> nA ; i++ ){
-		/* print name of the channel
-		 * then analog channels samples */
 		fprintf ( file_to_write, "%s;" , cfg_file -> a_channels [i]  . ch_id );
+	}
+	for ( i = 0 ; i < cfg_file -> nD ; i++ ){
+		fprintf ( file_to_write, "%s;" , cfg_file -> d_channels [i]  . ch_id );
+	}
 
-		for ( j = 0 ; j < dat_file -> data_lines_count ; j++ ){
+	fprintf ( file_to_write , "\n" );
+
+	/*for following rows we print timestamp column and then
+	 * all the analog and discrete vals columns*/
+	for ( i = 0 ; i < dat_file -> data_lines_count ; i++ ){
+
+		fprintf ( file_to_write , "%d;" , dat_file -> data_lines [i] . timestamp );
+
+		/*analog_vals*/
+		for ( j = 0 ; j < cfg_file -> nA ; j++ ){
 			value_to_print =
-				(dat_file -> data_lines [j]  . A_values [ i ] )
+				(dat_file -> data_lines [ i ]  . A_values [ j ] )
 				* 
-				(cfg_file -> a_channels [ i ] . a ) 
+				(cfg_file -> a_channels [ j ] . a ) 
 				+
-				(cfg_file -> a_channels [ i ] . b ) ;
+				(cfg_file -> a_channels [ j ] . b ) ;
 
 			fprintf ( file_to_write , "%f;" , value_to_print );
 		}
 
-		fprintf ( file_to_write , "\n" );
-	}
-
-
-	/* then performing the same actions on digital channels */
-	for ( i = 0 ; i < cfg_file -> nD ; i++ ){
-		/* print name of the channel
-		 * then digital channels samples */
-		fprintf ( file_to_write, "%s;" , cfg_file -> d_channels [i]  . ch_id );
-
-		for ( j = 0 ; j < dat_file -> data_lines_count ; j++ ){
-			fprintf ( file_to_write , "%d;" , dat_file -> data_lines [ j ] . D_values [ i ] );
+		/*discrete vals*/
+		for ( j = 0 ; j < cfg_file -> nD ; j++ ){
+			fprintf ( file_to_write , "%d;" , dat_file -> data_lines [ i ] . D_values [ j ] );
 		}
-		fprintf ( file_to_write , "\n" );
+			fprintf ( file_to_write , "\n" );
+
 	}
 
 
