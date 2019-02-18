@@ -1,0 +1,5 @@
+this library (or program) is an practical application of IEEE 37.111 standart
+named COMTRADE 2003.
+COMTRADE stands for Common Format for Transient Data Exchange
+Any oscillogram consists of obligatory cfg and dat file and optional inf and hdr
+Text data could be presented as ASCII (single-byte) or UTF-8 (multi-byte)
