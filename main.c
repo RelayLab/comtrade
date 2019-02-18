@@ -1,12 +1,17 @@
+/* file: main.c
+ * this executable transforms contents of a comtrade record to a csv file
+ * in order to plot the contents
+ * the main idea was to organize .cfg and .dat struct
+ * according to the IEEE37.2013 standart and then read or
+ * write their contents to other file formats*/
+
 #include "main.h"
 
-/* this executable transforms contents of comtrade record to csv file
- * in order to plot the contents*/
 
 int main ( int argc, char ** argv ) {
 
 	/*the program accepts only 1 arg, prefix name of .cfg and .dat file,
-	 * they should be similar*/
+	 * so they should be similar*/
 	if ( argc != 2 ){
 		fprintf ( stderr , "%s\n", "Wrong number of arguments proveded!" );
 		return 0;
@@ -14,19 +19,28 @@ int main ( int argc, char ** argv ) {
 	
 	char * filename = argv[1];
 
-	cfg_file_2003 * cfg_file = malloc ( sizeof ( cfg_file_2003 ) );
-	read_cfg_file ( cfg_file , filename );
+	/* these are struct for holding the contents of files*/
+	cfg_file_2013 * cfg_file = malloc ( sizeof ( cfg_file_2013 ) );
+	dat_file_2013 * dat_file = malloc ( sizeof ( dat_file_2013 )  );
+
+	read_cfg_file (
+			cfg_file , 	/*pointer to .cfg struct*/
+			filename );	/*file to open*/
 
 	/*for simplicity of the program, .dat file dimensions calculated
 	 * via .cfg file contents */
 
 	/*each line represents number of the line, timestamp and TT samples of data*/
 	/*number of lines equal to the last sampling data "endsamp" value*/
-	dat_file_2003 * dat_file = malloc (  sizeof ( dat_file_2003 )  );
-	int rows = cfg_file -> s_data [ cfg_file -> nrates - 1 ].endsamp;
-	dat_file -> data_lines_count = rows ; 
+	dat_file -> data_lines_count  =
+		cfg_file -> s_data [ cfg_file -> nrates - 1 ].endsamp;
 
-	read_dat_file ( dat_file, filename , cfg_file -> nA , cfg_file -> nD , rows );
+	read_dat_file (
+			dat_file , 						/*pointer to .dat struct*/
+			filename , 						/*file to open*/
+			cfg_file -> nA ,				/*number of analog channels*/
+			cfg_file -> nD ,				/*number of digital channels*/
+			dat_file -> data_lines_count);	/*number of samples in file*/
 
 	write_to_csv ( cfg_file , dat_file , filename  );
 

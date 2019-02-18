@@ -9,8 +9,8 @@
 #include "main.h"
 
 void write_to_csv (
-		cfg_file_2003 * cfg_file,
-		dat_file_2003 * dat_file ,
+		cfg_file_2013 * cfg_file,
+		dat_file_2013 * dat_file ,
 		char * filename_prefix ) {
 
 	/* open a stream for writing */

@@ -3,7 +3,7 @@
 void read_sampling_data ( 
 		FILE * file_to_read,
 		char * buff,
-		cfg_file_2003 * cfg_file,
+		cfg_file_2013 * cfg_file,
 		bool * is_eol){
 
 	cfg_file -> s_data = 

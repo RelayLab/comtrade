@@ -3,7 +3,7 @@
 void read_analog_channels ( 
 		FILE * file_to_read,
 		char * buff,
-		cfg_file_2003 * cfg_file,
+		cfg_file_2013 * cfg_file,
 		bool * is_eol){
 
 	cfg_file -> a_channels = malloc (  sizeof ( analog_channel ) * cfg_file -> nA );
