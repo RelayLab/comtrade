@@ -9,45 +9,55 @@
 #include "analog_channel.h"
 #include "digital_channel.h"
 #include "sampling_data.h"
+#include "uchar_size.h"
 
 #ifndef CFG_FILE_2003_H
 #define CFG_FILE_2003_H 1
 
 struct cfg_file_2003{
 
-	/*the first line of the cfg specifies next three fields:
+	/*LINE 1 of the cfg specifies next three fields:
 	 * station_name, rec_dev_id, rev_year*/
 
-	/* critical
-	 * any general short data about
-	 * max length = 64 characters*/
-	char station_name[64];
+	/* any general short info about the place where record have been made
+	 * critical
+	 * alphanumeric
+	 * 0 to 64 chars*/
+	char station_name [64*UCHAR_SIZE] ;
 
-	/*critical
-	 * any info about recording device*/
-	char rec_dev_id[64];
+	/* any info about recording device
+	 * critical
+	 * alphanumeric
+	 * 0 to 64 chars*/
+	char rec_dev_id [64*UCHAR_SIZE] ;
 
-	/*critical
-	 * COMTRADE standart version, which is used across the file
-	 * can only be equal to 1991, 1999, 2013
-	 * if empty counts as 1991
-	 */
+	/* COMTRADE standart version, which is used across the file
+	 * can only be equal to 1991, 1999, 2013. if empty counts as 1991
+	 * critical
+	 * numeric
+	 * 4 chars */
 	int rev_year;
 	
-	/*the second line contains general data about recorded channels
+	/* LINE 2 contains general data about recorded channels
 	 * TT, nA, nD*/
 
-	/* critical
-	 * total number of channels from 1 to 999999
+	/* total number of channels from 1 to 999999
 	 * should be equal to the sum of nA and nD variables, e.g.
-	 * analog and digital channels*/
+	 * analog and digital channels
+	 * critical
+	 * numeric
+	 * 1 to 6 chars
+	 * 1 to 999999 val*/
 	int TT;
 
-	/*critical
-	 * total number of analog and digital channels
+	/* total number of analog and digital channels
 	 * alphanumeric value from 0A to 999999A (with A letter at the end)
 	 * for analog channels, 0D to 999999D for the digital ones
-	 * N.B. here integer is used as these values only are ints + A or D letter*/
+	 * N.B. here integer is used as these values only are ints + A or D letter
+	 * critical
+	 * alphanumeric
+	 * 2 to 7 chars
+	 * 0 to 999999 val*/
 	int nA;
 	int nD;
 
@@ -63,16 +73,19 @@ struct cfg_file_2003{
 	 * and their number should be equal to nD variable*/
 	digital_channel * d_channels;
 	
-	/*the next line contains only info about power system frequency
+	/*NEXT LINE contains only info about power system frequency
 	 * from which samples in analog and digital channels
 	 * were obtained (usually 50 Hz)
-	 *
 	 * critical
+	 * real
 	 * 0 to 32 chars*/
 	double lf;
 
-	/*the next line means a
-	/*total number of samples (points) in dat file*/
+	/*NEXT LINE means a total number of samples (points) in dat file
+	 * critical
+	 * integer
+	 * 1 to 3 chars
+	 * 0 to 999 val*/
 	int nrates;
 
 	/* sampling rate for each set of data in dat file
@@ -118,6 +131,8 @@ struct cfg_file_2003{
 	 * 00.000000 to 59.999999999*/
 	double start_ss_ssssss;
 
+	/* NEXT LINE the same for trigger moment
+	 * specifies additional place in the recod for convinience*/
 	int trig_dd;
 	int trig_mm;
 	int trig_yyyy;
@@ -125,22 +140,40 @@ struct cfg_file_2003{
 	int trig_min;
 	double trig_ss_ssssss;
 
-	/*data file type
+	/* NEXT LINE data file type
 	 * could be ASCII,binary,binary32,float32
+	 * critical
+	 * alphabetic
 	 * 5 to 8 chars*/
-	char ft[8];
+	char ft [8*UCHAR_SIZE];
 
-	/*1 to 32 chars*/
+	/* NEXT LINE. time multiplier for long records
+	 * critical
+	 * real
+	 * 1 to 32 chars*/
 	float timemult;
 
-	/*1 to 6 chars*/
-	char time_code[6];
-	/*1 to 6 chars*/
-	char local_code[6];
+	/* NEXT LINE. time zone code , specified by the separate IEEE C37.232 standart
+	 * critical 
+	 * alphanumeric
+	 * 1 to 6 chars*/
+	char time_code[6*UCHAR_SIZE];
+	/* difference between UTC and local time of the record in IEEE C37.232 form
+	 * critical
+	 * alphanumeric
+	 * 1 to 6 chars*/
+	char local_code[6*UCHAR_SIZE];
 
-	/*1 char*/
+	/*THE LAST LINE*/
+	/* device's clock quality in the terms of IEEE37.118 
+	 * critical
+	 * hexadecimal
+	 * 1 char*/
 	int tmq_code;
-	/*1 char*/
+	/* leap second indicator (???)
+	 * critical
+	 * integer
+	 * 1 char*/
 	int leapsec;
 };
 
