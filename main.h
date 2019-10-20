@@ -17,14 +17,23 @@ void read_cfg_file (
 		cfg_file_2013 * cfg_file , /*pointer to .cfg struct*/ 
 		char * filename_prefix ) ; /*file to open*/        
 
-void read_dat_file (
+void read_ascii_dat_file (
 		dat_file_2013 * dat_file ,
 		char * filename_prefix ,
 		int nA ,
 		int nD ,
 		int rows );
 
+void read_binary_dat_file (
+		dat_file_2013 * dat_file ,
+		char * filename_prefix ,
+		int nA ,
+		int nD ,
+		int N,
+		int rows );
+
 void read_from_file ( FILE * file_to_read, char * buff , bool *is_eol );
+int read_from_binary_file ( FILE * file_to_read, int N );
 
 void read_analog_channels ( 
 		FILE * file_to_read,

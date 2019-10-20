@@ -1,0 +1,7 @@
+Currents, voltages, and digital outputs in this file were sampled from the Condie terminal of the 230 kV transmission line number 907, from Condie to PopularRiver. The 230 kV transmission line branches into a tee at the Condie end. On each side of the branch is a circuit breaker. The currents in the two branches are sampled and the sum of the currents in the two branches (i.e., current in the line) is also sampled.
+The fault type and location are not known. The parameters of the system element on which the fault was experienced and the source impedances, therefore, are not known.
+The operating conditions that existed immediately prior to the occurrence of the disturbance were not recorded. However, six cycles of pre-disturbance data are recorded in this file and the operating conditions can be calculated from that data.
+The disturbance occurred on 11 July 1995 at 17:38:26.687500 hours.
+Six cycles of pre-transient data and eight cycles of post-transient data are on the file. In total, there are fourteen cycles of data recorded on the file.
+Data samples have been obtained at 6 000 Hz. Anti-aliasing filters used for recording this data were second-order Butterworth filters that have a cutoff frequency of 2 000 Hz
+The time skew of recording within each data set is zero. The nature of data in each column and the scaling factor for each operating parameter are as defined in the configuration file.

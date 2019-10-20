@@ -2,16 +2,10 @@
  containing description of the COMTRADE 2013 standart
  for measuring records*/
 
-/*this is header files, used by this file
- * enclosed in special "header brackets"
- * in order to include them only once and
- * in a correct way*/
+#pragma once
 #include "analog_channel.h"
 #include "digital_channel.h"
 #include "sampling_data.h"
-
-#ifndef CFG_FILE_2013_H
-#define CFG_FILE_2013_H 1
 
 struct cfg_file_2013{
 
@@ -148,5 +142,3 @@ struct cfg_file_2013{
 
 //define more usable name
 typedef struct cfg_file_2013 cfg_file_2013;
-
-#endif

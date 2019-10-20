@@ -3,7 +3,7 @@
  * dat file into the memory*/
 #include "main.h"
 
-void read_dat_file (
+void read_ascii_dat_file (
 		dat_file_2013 * dat_file ,
 		char * filename_prefix ,
 		int nA ,
@@ -21,8 +21,9 @@ void read_dat_file (
 
 	dat_file -> data_lines = malloc (  sizeof ( data_line ) * rows  );
 	int i,j;
+
 	/*is_eol var is not used here,
-	 * provided only for compatibility with read_cfg_file()*/
+	 * provided only for compatibility with read_from_file()*/
 	bool is_eol; 
 
 	for ( i = 0 ; i < rows ; i++ ){

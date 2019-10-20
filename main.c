@@ -35,12 +35,20 @@ int main ( int argc, char ** argv ) {
 	dat_file -> data_lines_count  =
 		cfg_file -> s_data [ cfg_file -> nrates - 1 ].endsamp;
 
-	read_dat_file (
+	read_binary_dat_file (
 			dat_file , 						/*pointer to .dat struct*/
 			filename , 						/*file to open*/
 			cfg_file -> nA ,				/*number of analog channels*/
 			cfg_file -> nD ,				/*number of digital channels*/
-			dat_file -> data_lines_count);	/*number of samples in file*/
+			4,								/*bytes per sample*/
+			dat_file -> data_lines_count);	/*number of samples in file*///
+
+//	read_ascii_dat_file (
+//			dat_file , 						/*pointer to .dat struct*/
+//			filename , 						/*file to open*/
+//			cfg_file -> nA ,				/*number of analog channels*/
+//			cfg_file -> nD ,				/*number of digital channels*/
+//			dat_file -> data_lines_count);	/*number of samples in file*/
 
 	write_to_csv ( cfg_file , dat_file , filename  );
 
